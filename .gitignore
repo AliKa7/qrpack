@@ -1,0 +1,26 @@
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+dist/
+build/
+
+# macOS
+.DS_Store
+
+# qrpack outputs — never commit generated sheets or renders
+brag-output/
+*.png
+*.jpg
+*.pdf
+*.mp4
+restored*/
+sheet*.png
+!docs/**/*.png
+
+# local
+.env
+.env.*
