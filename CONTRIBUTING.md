@@ -1,6 +1,6 @@
 # Contributing to qrpack
 
-Five people, one repo, visible and even contribution history. Read this once
+Six people, one repo, visible and even contribution history. Read this once
 before your first commit.
 
 **This is a 3-day sprint.** Timeline and task assignments are in `PLAN.md`.
@@ -16,7 +16,7 @@ The grade for a group project is partly "did everyone actually work". GitHub
 answers that question automatically through the commit graph, and the graph is
 easy to ruin by accident:
 
-- One person pastes everyone's code and commits it → four members look idle.
+- One person pastes everyone's code and commits it → five members look idle.
 - Everyone works on `main` → constant conflicts, and nobody reviews anything.
 - Three commits total, all on the last night → looks like panic, because it is.
 
@@ -51,22 +51,28 @@ up as an unknown author and do not count toward your contribution graph.
 ## 2. Who owns what
 
 Each member owns one module. You may read anything; you only *edit* your own
-area without asking. This is what makes five people work in parallel without
+area without asking. This is what makes six people work in parallel without
 stepping on each other.
 
 | # | Member | GitHub | Owns | Files |
 |---|---|---|---|---|
-| 1 | Arsen Toktarbek | `arsentis` | Core — archiving, and calibration | `core.py` (pack/unpack), `calibrate.py` |
+| 1 | Arsen Toktarbek | `arsentis` | Core — archiving | `core.py` (`pack_bytes`, `unpack_bytes`, compression) |
 | 2 | Aubakir Arman | `Rustlingrass` | Core — framing | `core.py` (`Header`, `chunk`, `estimate`, sha256) |
 | 3 | alikaiyr | `AliKa7` | Sheet — layout and output | `sheet.py` |
 | 4 | Yerassyl | `yerassy1dev` | Scan — decoding and recovery | `scan.py` |
-| 5 | — | `dreamboy17` | CLI, CI, documentation | `cli.py`, `.github/workflows/`, `README.md` |
+| 5 | Arman Kali | `dreamboy17` | CLI and CI | `cli.py`, `.github/workflows/` |
+| 6 | Aslanbek | `Hetag-byte` | Calibration and docs | `calibrate.py`, `README.md` |
 
 Members 1 and 2 share `core.py` but own different *functions*, so they never
-touch the same lines — provided the signatures agreed in Hour 0 are respected.
+touch the same lines — provided the agreed signatures are respected.
 
-`cli.py` is owned by member 5, but each person adds their own subcommand when
-their module is ready. Keep those edits to your own subcommand.
+`cli.py` is owned by Arman, but each person adds their own subcommand when their
+module is ready. Keep those edits to your own subcommand.
+
+Review ring — review the person below you, so nobody waits and nobody reviews
+their own work:
+
+    Arsen -> Aubakir -> alikaiyr -> Yerassyl -> Arman -> Aslanbek -> Arsen
 
 Everyone writes tests for their own module. "The tests are member 4's job" is
 how a project fails.
@@ -120,7 +126,7 @@ work, commit at each of these moments — they are all real, none are padding:
 4. the explanation            docs: record why mtime must be zeroed
 ```
 
-One small feature = four commits. Five people × one feature a day = 20 commits
+One small feature = four commits. Six people × one feature a day = 24 commits
 a day, every one of them genuine work.
 
 Rules of thumb:
