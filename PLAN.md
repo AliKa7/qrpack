@@ -1,29 +1,34 @@
 # qrpack — 3-day sprint plan
 
-Five people, 72 hours, a working package and an even contribution graph.
+Six people, 72 hours, a working package and an even contribution graph.
 
 Honest framing: a three-day history looks like three days. That is fine. What is
 judged is whether **every member contributed real, reviewed work**, and that is
 entirely achievable in three days. Do not backdate anything.
 
-Target: ~60 commits, 15 merged pull requests, 5 contributors with comparable
+Target: ~70 commits, 18 merged pull requests, 6 contributors with comparable
 columns in Insights → Contributors.
 
 ## The team
 
 | # | Member | GitHub | Owns |
 |---|---|---|---|
-| 1 | Arsen Toktarbek | `arsentis` | `core.py` archiving, `calibrate.py` |
+| 1 | Arsen Toktarbek | `arsentis` | `core.py` archiving (pack/unpack, compression) |
 | 2 | Aubakir Arman | `Rustlingrass` | `core.py` framing (Header, chunk, sha256) |
 | 3 | Ali Kaiyr | `AliKa7` | `sheet.py` layout and output |
 | 4 | Yerassyl | `yerassy1dev` | `scan.py` decoding and recovery |
-| 5 | — | `dreamboy17` | `cli.py`, CI, README |
+| 5 | Arman Kali | `dreamboy17` | `cli.py`, CI |
+| 6 | Aslanbek | `Hetag-byte` | `calibrate.py`, README |
 
-Everyone has exactly 3 issues: one per day, already assigned on GitHub.
+Everyone has 3 issues: one per day, assigned on GitHub.
+
+Review ring — you review the person below you, and nobody reviews their own work:
+
+    Arsen -> Aubakir -> alikaiyr -> Yerassyl -> Arman -> Aslanbek -> Arsen
 
 Aim for **4 commits per issue** (failing test → minimal pass → edge case →
 docs). See CONTRIBUTING.md § "Commit FOUR times per feature".
-Five people × 4 commits × 3 days ≈ 60 commits.
+Six people × 4 commits × 3 days ≈ 70 commits.
 
 
 ## Hour 0 — before anyone writes code (20 minutes, group chat is fine)
@@ -44,7 +49,7 @@ git config --global user.email "the email on your GitHub account"
    as yours**, and nobody notices until it is too late to fix.
 
 2. Everyone confirms these function signatures. They are the seams between the
-   five modules; once fixed, five people can work at once without blocking:
+   six modules; once fixed, six people can work at once without blocking:
 
 ```python
 pack_bytes(src: Path) -> bytes
@@ -74,7 +79,8 @@ QRPK1|<sha256-first-16>|<index>/<total>|<base64 chunk>
 | Aubakir | `Header` + `chunk()` + sha256 | a header parses back to the same fields |
 | alikaiyr | payloads → QR images (segno) | a PNG of one code exists on disk |
 | Yerassyl | `decode_one`: one QR image → text | decodes what alikaiyr produced |
-| dreamboy17 | CLI skeleton + CI + README problem/aim | green check on a pull request |
+| Arman | CLI skeleton + CI | green check on a pull request |
+| Aslanbek | README problem and aim, `calibrate.py` stub | README explains the goal |
 
 **End of day 1:** pack → chunk → reassemble → unpack works in memory. No paper
 yet. Aubakir and Yerassyl pair on the first integration test.
@@ -88,7 +94,8 @@ yet. Aubakir and Yerassyl pair on the first integration test.
 | Aubakir | sha256 verification on restore |
 | alikaiyr | grid layout, uniform cells, labels, multi-sheet, PDF |
 | Yerassyl | scan a whole sheet, report missing part numbers |
-| dreamboy17 | wire `estimate` / `pack` / `restore` for real |
+| Arman | wire `estimate` / `pack` / `restore` for real |
+| Aslanbek | `calibrate`: payload ladder and QR version table |
 
 **End of day 2 — this must work:**
 
@@ -106,11 +113,12 @@ this instead. It is the demo.
 
 | Who | Issue |
 |---|---|
-| Arsen | `calibrate`: payload ladder, px/module table, chunk recommendation |
+| Arsen | README usage section with real pasted output |
 | Aubakir | damage test: black out a code, assert the missing part is named |
 | alikaiyr | print a sheet, photograph it, restore it, record the result |
 | Yerassyl | README measured-findings section (every number with its command) |
-| dreamboy17 | tag v0.1.0, CI badge, final `git shortlog` check |
+| Arman | tag v0.1.0, CI badge, final `git shortlog` check |
+| Aslanbek | `calibrate`: px/module analysis and chunk recommendation |
 
 Leave the last 3 hours free for the submission itself. Merge nothing large in
 the final hour.
@@ -147,12 +155,27 @@ Midday and evening. If someone has zero commits at the end of day 1, reassign
 work that evening. By day 3 it cannot be fixed.
 
 
-## If a sixth member joins
+## Invite status
+
+Everyone must **accept the collaborator invite** before issues can be assigned
+to them — GitHub silently drops assignees who are not yet collaborators.
 
 ```bash
-gh api -X PUT repos/arsentis/qrpack/collaborators/THEIR_USER -f permission=push
-gh issue edit N --add-assignee THEIR_USER --remove-assignee arsentis
+gh api repos/arsentis/qrpack/collaborators --jq '.[].login'   # accepted
+gh api repos/arsentis/qrpack/invitations   --jq '.[].invitee.login'  # pending
+bash assign-issues.sh      # re-run after each person accepts
 ```
 
-Give them `calibrate.py` (currently Arsen's day-3 issue). It depends on nothing
-but segno and OpenCV, so they can start immediately without blocking anyone.
+## No bot authorship
+
+Do not install the Claude, Copilot, or any other GitHub App on this repo: it
+commits as `claude[bot]` and is counted as a contributor, which devalues the
+graph this project is judged on. Using an assistant locally is fine — commit
+under your own name and GitHub email so the credit is yours. Never leave an AI
+`Co-authored-by:` trailer in a commit message; some tooling adds one silently.
+
+Audit any time:
+
+```bash
+bash audit-authors.sh
+```
