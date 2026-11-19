@@ -58,7 +58,7 @@ stepping on each other.
 |---|---|---|---|---|
 | 1 | Arsen Toktarbek | `arsentis` | Core — archiving, and calibration | `core.py` (pack/unpack), `calibrate.py` |
 | 2 | Aubakir Arman | `Rustlingrass` | Core — framing | `core.py` (`Header`, `chunk`, `estimate`, sha256) |
-| 3 | alikaiyr | `AliKa7` | Sheet — layout and output | `sheet.py` |
+| 3 | Ali Kaiyr | `AliKa7` | Sheet — layout and output | `sheet.py` |
 | 4 | Yerassyl | `yerassy1dev` | Scan — decoding and recovery | `scan.py` |
 | 5 | — | `dreamboy17` | CLI, CI, documentation | `cli.py`, `.github/workflows/`, `README.md` |
 
