@@ -15,7 +15,7 @@ columns in Insights → Contributors.
 |---|---|---|---|
 | 1 | Arsen Toktarbek | `arsentis` | `core.py` archiving, `calibrate.py` |
 | 2 | Aubakir Arman | `Rustlingrass` | `core.py` framing (Header, chunk, sha256) |
-| 3 | alikaiyr | `AliKa7` | `sheet.py` layout and output |
+| 3 | Ali Kaiyr | `AliKa7` | `sheet.py` layout and output |
 | 4 | Yerassyl | `yerassy1dev` | `scan.py` decoding and recovery |
 | 5 | — | `dreamboy17` | `cli.py`, CI, README |
 
